@@ -163,7 +163,7 @@ oUF.Tags.Methods['raid:hp'] = function(u)
 		return nil
 	end
 end
-oUF.Tags.Events['raid:hp'] = 'UNIT_HEALTH UNIT_CONNECTION UNIT_HEAL_PREDICTION'
+oUF.Tags.Events['raid:hp'] = 'UNIT_HEALTH UNIT_CONNECTION'
 
 oUF.Tags.Methods['party:hp'] = function(u)
 	local min, max = UnitHealth(u), UnitHealthMax(u)
@@ -198,26 +198,24 @@ end
 oUF.Tags.Events['altpower'] = 'UNIT_POWER_UPDATE UNIT_MAXPOWER'
 
 oUF.Tags.Methods['player:power'] = function(u)
-	local spec = GetSpecialization()
 	local fury = UnitPower('player', SPELL_POWER_DEMONIC_FURY)
 	local mana = UnitPower('player', SPELL_POWER_MANA)
-	local stagger = UnitStagger('player')
 	if UnitIsDead(u) or UnitIsGhost(u) or not UnitIsConnected(u) then
 		return nil
-	elseif class == 'WARLOCK' and spec == SPEC_WARLOCK_DEMONOLOGY then
+	elseif class == 'WARLOCK' then
 		local r, g, b = 0.9, 0.37, 0.37
 		return ('|cff559655 || ') .. hex(r, g, b) .. sValue(fury)
 	elseif class == 'DRUID' and not UnitPowerType('player') == SPELL_POWER_MANA then
 		local r, g, b = oUF.colors.power['MANA']
 		return ('|cff559655 || ') .. hex(r, g, b) .. sValue(mana)
-	elseif class == 'MONK' and stagger > 0 then
+	elseif class == 'MONK' then
 		local r, g, b = 0.52, 1.0, 0.52
 		return ('|cff559655 || ') .. hex(r, g, b) .. sValue(stagger)
 	else
 		return nil
 	end
 end
-oUF.Tags.Events['player:power'] = 'UNIT_POWER_UPDATE PLAYER_SPECIALIZATION_CHANGED PLAYER_TALENT_UPDATE UNIT_HEALTH UNIT_CONNECTION'
+oUF.Tags.Events['player:power'] = 'UNIT_POWER_UPDATE PLAYER_TALENT_UPDATE UNIT_HEALTH UNIT_CONNECTION'
 
 oUF.Tags.Methods['LFD'] = function(u)
 	local role = UnitGroupRolesAssigned(u)

@@ -336,16 +336,6 @@ local UnitSpecific = {
 		ct.text:SetText('|cffAF5050j|r')
 		self.CombatIndicator = ct
 
-		local altp = createStatusbar(self, G.texture, nil, 30, 180, unpack(G.colors.base))
-		altp:SetPoint("CENTER", UIParent, "CENTER", 0, -180)
-		altp.bd = F.createBorder(altp, altp)
-		altp.Text = fs(altp, 'OVERLAY', G.unitframes.font, G.unitframes.fontsize, G.unitframes.fontflag, 1, 1, 1)
-		altp.Text:SetPoint('CENTER')
-		self:Tag(altp.Text, '[altpower]')
-		altp:EnableMouse(true)
-		altp.colorTexture = true
-		self.AlternativePower = altp
-
 		if (class == 'PRIEST' or class == 'PALADIN' or class == 'MONK' or class == 'ROGUE') then
 			local ClassPower = CreateFrame('Frame', nil, self)
 			ClassPower:SetPoint('TOPRIGHT', self.Power, 'BOTTOMRIGHT', 2, -1)
@@ -805,45 +795,14 @@ oUF:Factory(function(self)
 	local arenaprepupdate = CreateFrame('Frame')
 	arenaprepupdate:RegisterEvent('PLAYER_LOGIN')
 	arenaprepupdate:RegisterEvent('PLAYER_ENTERING_WORLD')
-	arenaprepupdate:RegisterEvent('ARENA_OPPONENT_UPDATE')
-	arenaprepupdate:RegisterEvent('ARENA_PREP_OPPONENT_SPECIALIZATIONS')
 	arenaprepupdate:SetScript('OnEvent', function(self, event)
 		if event == 'PLAYER_LOGIN' then
 			for i = 1, 5 do
 				arenaprep[i]:SetAllPoints(_G['oUF_Arena' .. i])
 			end
-		elseif event == 'ARENA_OPPONENT_UPDATE' then
+		else
 			for i = 1, 5 do
 				arenaprep[i]:Hide()
-			end
-		else
-			local numOpps = GetNumArenaOpponentSpecs()
-
-			if numOpps > 0 then
-				for i = 1, 5 do
-					local f = arenaprep[i]
-
-					if i <= numOpps then
-						local s = GetArenaOpponentSpec(i)
-						local _, spec, class = nil, 'UNKNOWN', 'UNKNOWN'
-
-						if s and s > 0 then
-							_, spec, _, _, _, _, class = GetSpecializationInfoByID(s)
-						end
-
-						if class and spec then
-							f.Health:SetStatusBarColor(unpack(G.colors.base))
-							f.Spec:SetText(spec .. '  -  ' .. LOCALIZED_CLASS_NAMES_MALE[class])
-							f:Show()
-						end
-					else
-						f:Hide()
-					end
-				end
-			else
-				for i = 1, 5 do
-					arenaprep[i]:Hide()
-				end
 			end
 		end
 	end)
