@@ -1,0 +1,6 @@
+local f = CreateFrame("Frame", nil, UIParent)
+f:RegisterEvent("PLAYER_ENTERING_WORLD")
+f:SetScript("OnEvent", function(self, event)
+    UIParent:SetScale(768/string.match(({GetScreenResolutions()})[GetCurrentResolution()], "%d+x(%d+)"))
+    f:UnregisterAllEvents()
+end)

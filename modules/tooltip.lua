@@ -22,6 +22,10 @@ for key, value in pairs(tooltips) do
 	_G[value]:SetBackdrop(nil)
 	F.addBackdrop(_G[value])
 
+	_G[value]:HookScript('OnShow', function(self)
+		self:SetBackdropColor(unpack(G.colors.base))
+	end)
+
 	_G[value].bg = CreateFrame("Frame", nil, GameTooltip)
 	_G[value].bg:SetAllPoints(true)
 	_G[value].bg:SetFrameLevel(0)

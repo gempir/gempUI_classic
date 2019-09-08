@@ -215,16 +215,4 @@ oUF.Tags.Methods['player:power'] = function(u)
 		return nil
 	end
 end
-oUF.Tags.Events['player:power'] = 'UNIT_POWER_UPDATE PLAYER_TALENT_UPDATE UNIT_HEALTH UNIT_CONNECTION'
-
-oUF.Tags.Methods['LFD'] = function(u)
-	local role = UnitGroupRolesAssigned(u)
-	if role == 'HEALER' then
-		return '|cff8AFF30H|r'
-	elseif role == 'TANK' then
-		return '|cff5F9BFFT|r'
-	elseif role == 'DAMAGER' then
-		return '|cffFF6161D|r'
-	end
-end
-oUF.Tags.Events['LFD'] = 'PLAYER_ROLES_ASSIGNED'
+oUF.Tags.Events['player:power'] = 'UNIT_POWER_UPDATE UNIT_HEALTH UNIT_CONNECTION'

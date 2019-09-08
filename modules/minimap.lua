@@ -18,22 +18,22 @@ end
 Minimap:SetMaskTexture('Interface\\ChatFrame\\ChatFrameBackground')
 
 MiniMapTrackingFrame:ClearAllPoints()
-MiniMapTrackingFrame:SetPoint("TOPRIGHT", Minimap, -2, -2)
+MiniMapTrackingFrame:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT", 9, 0)
 MiniMapTrackingBorder:Hide()
-MiniMapTrackingIcon:SetScale(0.8)
+MiniMapTrackingIcon:SetScale(0.6)
 MiniMapTrackingIcon:SetTexCoord(.08, .92, .08, .92)
 
-local function OnLeave()
-	if not Minimap:IsMouseOver() then
-		UIFrameFadeOut(MiniMapTrackingFrame, 0.3, 1, 0)
-	end
-end
+-- local function OnLeave()
+-- 	if not Minimap:IsMouseOver() then
+-- 		UIFrameFadeOut(MiniMapTrackingFrame, 0.3, 1, 0)
+-- 	end
+-- end
 
-Minimap:HookScript('OnEnter', function()
-	UIFrameFadeIn(MiniMapTrackingFrame, 0.3, 0, 1)
-end)
-Minimap:HookScript('OnLeave', OnLeave)
-MiniMapTrackingFrame:HookScript('OnLeave', OnLeave)
+-- Minimap:HookScript('OnEnter', function()
+-- 	UIFrameFadeIn(MiniMapTrackingFrame, 0.3, 0, 1)
+-- end)
+-- Minimap:HookScript('OnLeave', OnLeave)
+-- MiniMapTrackingFrame:HookScript('OnLeave', OnLeave)
 
 -- Hide All
 local HideAll = {
@@ -448,7 +448,7 @@ end
 
 local clockFrame, clockTime = TimeManagerClockButton:GetRegions()
 clockFrame:Hide()
-clockTime:SetFont(G.fonts.square, 10, 'OUTLINEMONOCHROME')
+clockTime:SetFont(G.fonts.square, 12, 'OUTLINEMONOCHROME')
 clockTime:SetShadowOffset(0, 0)
 clockTime:SetTextColor(1, 1, 1)
 TimeManagerClockButton:SetFrameStrata('TOOLTIP')

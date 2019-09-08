@@ -18,4 +18,5 @@
     <Script file="fonts.lua"/>
     <Script file="chat.lua"/>
     <Script file="panels.lua"/>
+    <Script file="pixelperfect.lua"/>
 </Ui>

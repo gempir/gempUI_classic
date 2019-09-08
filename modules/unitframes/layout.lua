@@ -608,13 +608,8 @@ local UnitSpecific = {
 		self.Health:SetHeight(G.unitframes.party.health)
 		self.Power:SetHeight(G.unitframes.party.power)
 
-		local lfd = fs(self.Health, 'OVERLAY', symbol, 12, "", 1, 1, 1)
-		lfd:SetPoint('LEFT', 4, 0)
-		lfd:SetJustifyH 'LEFT'
-		self:Tag(lfd, '[LFD]')
-
 		local name = fs(self.Health, 'OVERLAY', G.unitframes.font, G.unitframes.fontsize - 2, G.unitframes.fontflag, 1, 1, 1)
-		name:SetPoint('LEFT', lfd, 'RIGHT', 0, 0)
+		name:SetPoint('LEFT', 4, 0)
 		name:SetJustifyH 'LEFT'
 		self:Tag(name, ' [color][short:name] [lvl]')
 
@@ -683,11 +678,6 @@ local UnitSpecific = {
 		htext:SetPoint('RIGHT', -5, -8)
 		htext:SetJustifyH 'RIGHT'
 		self:Tag(htext, '[raid:hp]')
-
-		local lfd = fs(self.Health, 'OVERLAY', symbol, 10, '', 1, 1, 1)
-		lfd:SetShadowOffset(1, -1)
-		lfd:SetPoint('TOPRIGHT', -1, -2)
-		self:Tag(lfd, '[LFD]')
 
 		self.RaidTargetIndicator:SetSize(14, 14)
 		self.RaidTargetIndicator:SetPoint('TOP', self.Health, 0, 5)
